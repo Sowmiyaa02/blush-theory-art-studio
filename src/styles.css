@@ -186,3 +186,38 @@
 @utility animate-float {
   animation: float-slow 8s ease-in-out infinite;
 }
+
+@keyframes color-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@utility rainbow-bg {
+  background: linear-gradient(120deg,
+    oklch(0.94 0.08 15),
+    oklch(0.92 0.09 60),
+    oklch(0.93 0.08 140),
+    oklch(0.92 0.09 260),
+    oklch(0.94 0.08 330));
+  background-size: 400% 400%;
+  animation: color-shift 18s ease infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@utility animate-sparkle {
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+@keyframes petal-fall {
+  0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.8; }
+  100% { transform: translateY(110vh) translateX(40px) rotate(360deg); opacity: 0; }
+}
+
+@utility animate-petal {
+  animation: petal-fall 14s linear infinite;
+}

@@ -15,14 +15,20 @@ import { toast } from "sonner";
 
 import hero from "@/assets/hero.jpg";
 import about from "@/assets/about.jpg";
-import g1 from "@/assets/g1.jpg";
-import g2 from "@/assets/g2.jpg";
-import g3 from "@/assets/g3.jpg";
-import g4 from "@/assets/g4.jpg";
-import g5 from "@/assets/g5.jpg";
-import g6 from "@/assets/g6.jpg";
-import g7 from "@/assets/g7.jpg";
-import g8 from "@/assets/g8.jpg";
+import p1Asset from "@/assets/paintings/p1.jpeg.asset.json";
+import p2Asset from "@/assets/paintings/p2.jpeg.asset.json";
+import p3Asset from "@/assets/paintings/p3.jpeg.asset.json";
+import p4Asset from "@/assets/paintings/p4.jpeg.asset.json";
+import p5Asset from "@/assets/paintings/p5.jpeg.asset.json";
+import p6Asset from "@/assets/paintings/p6.jpeg.asset.json";
+import p7Asset from "@/assets/paintings/p7.jpg.asset.json";
+const p1 = p1Asset.url;
+const p2 = p2Asset.url;
+const p3 = p3Asset.url;
+const p4 = p4Asset.url;
+const p5 = p5Asset.url;
+const p6 = p6Asset.url;
+const p7 = p7Asset.url;
 
 const NAV = [
   { label: "Home", href: "#home" },
@@ -172,6 +178,25 @@ function Hero() {
       <div className="pointer-events-none absolute right-10 top-1/4 h-56 w-56 rounded-full bg-accent/40 blur-3xl animate-float" style={{ animationDelay: "2s" }} />
       <div className="pointer-events-none absolute left-1/2 bottom-10 h-32 w-32 rounded-full bg-gold/20 blur-3xl animate-float" style={{ animationDelay: "4s" }} />
 
+      {/* floating colorful petals */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {[
+          { left: "8%", delay: "0s", color: "oklch(0.78 0.18 20)", size: "14px" },
+          { left: "22%", delay: "3s", color: "oklch(0.82 0.16 330)", size: "10px" },
+          { left: "38%", delay: "6s", color: "oklch(0.85 0.15 60)", size: "16px" },
+          { left: "55%", delay: "1.5s", color: "oklch(0.8 0.15 280)", size: "12px" },
+          { left: "70%", delay: "4.5s", color: "oklch(0.82 0.16 15)", size: "14px" },
+          { left: "85%", delay: "7.5s", color: "oklch(0.85 0.14 140)", size: "10px" },
+          { left: "92%", delay: "2s", color: "oklch(0.78 0.16 330)", size: "12px" },
+        ].map((p, i) => (
+          <span
+            key={i}
+            className="absolute top-0 rounded-full animate-petal"
+            style={{ left: p.left, animationDelay: p.delay, width: p.size, height: p.size, background: p.color, filter: "blur(0.5px)" }}
+          />
+        ))}
+      </div>
+
       <motion.div
         style={{ opacity }}
         className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 pt-24"
@@ -318,23 +343,22 @@ function About() {
 
 /* ---------------- GALLERY ---------------- */
 const GALLERY = [
-  { src: g1, cat: "Couple Portraits", title: "Whispered Vows" },
-  { src: g4, cat: "Pencil Sketches", title: "Quiet Grace" },
-  { src: g2, cat: "Family Portraits", title: "The Warmth Between" },
-  { src: g6, cat: "Watercolor Art", title: "Peonies in Bloom" },
-  { src: g3, cat: "Pet Portraits", title: "Golden Companion" },
-  { src: g5, cat: "Acrylic Paintings", title: "Blush Study N°3" },
-  { src: g8, cat: "Custom Paintings", title: "Silhouette of Us" },
-  { src: g7, cat: "Digital Portraits", title: "Bloomed" },
+  { src: p1, cat: "Fantasy Couple Art", title: "Beneath the Wildflower Tree", price: 150 },
+  { src: p2, cat: "Romantic Portraits", title: "Sparkle & Stillness", price: 120 },
+  { src: p3, cat: "Proposal Moments", title: "The Garden Proposal", price: 259 },
+  { src: p4, cat: "Customized Love Stories", title: "Sunlit Café Mornings", price: 259 },
+  { src: p5, cat: "Dream Wedding Scenes", title: "A Kiss at Golden Hour", price: 199 },
+  { src: p6, cat: "Anniversary Paintings", title: "Sunday Cuddles", price: 259 },
+  { src: p7, cat: "Fantasy Couple Art", title: "Heartbeat Echoes", price: 259 },
 ];
-const CATS = ["All", "Couple Portraits", "Family Portraits", "Pet Portraits", "Custom Paintings", "Pencil Sketches", "Acrylic Paintings", "Watercolor Art", "Digital Portraits"];
+const CATS = ["All", "Romantic Portraits", "Dream Wedding Scenes", "Fantasy Couple Art", "Anniversary Paintings", "Proposal Moments", "Customized Love Stories"];
 
 function Gallery() {
   const [active, setActive] = useState("All");
   const [lightbox, setLightbox] = useState<string | null>(null);
   const items = active === "All" ? GALLERY : GALLERY.filter((g) => g.cat === active);
   return (
-    <section id="gallery" className="relative py-28 md:py-40 bg-secondary/40">
+    <section id="gallery" className="relative py-28 md:py-40 rainbow-bg">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
@@ -386,12 +410,18 @@ function Gallery() {
                 loading="lazy"
                 className="w-full transition-transform duration-700 group-hover:scale-105"
               />
-              <figcaption className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-ink/80 via-ink/20 to-transparent p-6 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute top-4 right-4 rounded-full bg-background/95 backdrop-blur px-4 py-1.5 shadow-lg">
+                <span className="font-display text-lg gold-text font-semibold">${item.price}</span>
+              </div>
+              <figcaption className="absolute inset-x-0 bottom-0 flex flex-col justify-end bg-gradient-to-t from-ink/90 via-ink/40 to-transparent p-6 pt-16 translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
                 <p className="text-[10px] uppercase tracking-[0.3em] text-blush-soft">{item.cat}</p>
                 <h3 className="mt-1 font-display text-2xl text-primary-foreground">{item.title}</h3>
-                <span className="mt-3 inline-flex items-center gap-2 text-xs text-primary-foreground/90">
-                  View details <ArrowRight className="h-3 w-3" />
-                </span>
+                <div className="mt-3 flex items-center justify-between">
+                  <span className="inline-flex items-center gap-2 text-xs text-primary-foreground/90">
+                    View artwork <ArrowRight className="h-3 w-3" />
+                  </span>
+                  <span className="font-display text-xl text-blush-soft">${item.price}</span>
+                </div>
               </figcaption>
             </motion.figure>
           ))}
@@ -651,7 +681,7 @@ function FAQ() {
 
 /* ---------------- INSTA ---------------- */
 function InstaFeed() {
-  const posts = [g1, g6, g3, g5, g7, g8];
+  const posts = [p1, p2, p3, p4, p5, p6];
   return (
     <section className="relative py-28 md:py-40 bg-secondary/40">
       <div className="mx-auto max-w-7xl px-6">
@@ -734,7 +764,7 @@ function Contact() {
           </div>
 
           <div className="mt-12 relative aspect-[4/3] rounded-3xl overflow-hidden">
-            <img src={g6} alt="Watercolor illustration" className="h-full w-full object-cover" loading="lazy" />
+            <img src={p5} alt="Romantic couple painting" className="h-full w-full object-cover" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-tr from-background/40 to-transparent" />
           </div>
         </Reveal>
