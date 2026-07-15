@@ -358,7 +358,7 @@ function Gallery() {
   const [lightbox, setLightbox] = useState<string | null>(null);
   const items = active === "All" ? GALLERY : GALLERY.filter((g) => g.cat === active);
   return (
-    <section id="gallery" className="relative py-28 md:py-40 bg-secondary/40">
+    <section id="gallery" className="relative py-28 md:py-40 rainbow-bg">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
