@@ -178,6 +178,25 @@ function Hero() {
       <div className="pointer-events-none absolute right-10 top-1/4 h-56 w-56 rounded-full bg-accent/40 blur-3xl animate-float" style={{ animationDelay: "2s" }} />
       <div className="pointer-events-none absolute left-1/2 bottom-10 h-32 w-32 rounded-full bg-gold/20 blur-3xl animate-float" style={{ animationDelay: "4s" }} />
 
+      {/* floating colorful petals */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {[
+          { left: "8%", delay: "0s", color: "oklch(0.78 0.18 20)", size: "14px" },
+          { left: "22%", delay: "3s", color: "oklch(0.82 0.16 330)", size: "10px" },
+          { left: "38%", delay: "6s", color: "oklch(0.85 0.15 60)", size: "16px" },
+          { left: "55%", delay: "1.5s", color: "oklch(0.8 0.15 280)", size: "12px" },
+          { left: "70%", delay: "4.5s", color: "oklch(0.82 0.16 15)", size: "14px" },
+          { left: "85%", delay: "7.5s", color: "oklch(0.85 0.14 140)", size: "10px" },
+          { left: "92%", delay: "2s", color: "oklch(0.78 0.16 330)", size: "12px" },
+        ].map((p, i) => (
+          <span
+            key={i}
+            className="absolute top-0 rounded-full animate-petal"
+            style={{ left: p.left, animationDelay: p.delay, width: p.size, height: p.size, background: p.color, filter: "blur(0.5px)" }}
+          />
+        ))}
+      </div>
+
       <motion.div
         style={{ opacity }}
         className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 pt-24"
