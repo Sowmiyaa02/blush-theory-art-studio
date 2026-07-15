@@ -15,6 +15,10 @@ import { toast } from "sonner";
 
 import hero from "@/assets/hero.jpg";
 import about from "@/assets/about.jpg";
+import logoAsset from "@/assets/logo.jpeg.asset.json";
+import ourStoryAsset from "@/assets/our-story.jpeg.asset.json";
+const logoImg = logoAsset.url;
+const ourStoryImg = ourStoryAsset.url;
 import p1Asset from "@/assets/paintings/p1.jpeg.asset.json";
 import p2Asset from "@/assets/paintings/p2.jpeg.asset.json";
 import p3Asset from "@/assets/paintings/p3.jpeg.asset.json";
@@ -82,8 +86,8 @@ function Nav() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6">
         <a href="#home" className="flex items-center gap-2 group">
-          <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-blush to-accent shadow-md">
-            <Sparkles className="h-4 w-4 text-ink" />
+          <span className="grid h-10 w-10 place-items-center overflow-hidden rounded-full bg-gradient-to-br from-blush to-accent shadow-md ring-1 ring-gold/40">
+            <img src={logoImg} alt="Blush Theory Art logo" className="h-full w-full object-cover" />
           </span>
           <span className="font-display text-xl font-semibold tracking-wide">
             Blush <span className="gold-text">Theory</span>
@@ -294,7 +298,7 @@ function About() {
           <div className="relative">
             <div className="absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-br from-blush/60 to-accent/40 blur-2xl" />
             <img
-              src={about}
+              src={ourStoryImg}
               alt="Artist painting a portrait on canvas"
               className="w-full rounded-[2rem] object-cover shadow-2xl aspect-[4/5]"
               loading="lazy"
